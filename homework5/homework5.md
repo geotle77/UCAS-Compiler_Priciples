@@ -9,23 +9,7 @@
 2) 给出这个串的一个最右推导
     $$ \begin{align} S & \Rightarrow SS*\ & \Rightarrow Sa*\ & \Rightarrow SS+a*\ & \Rightarrow Sa+a* \ & \Rightarrow aa+a* \ \end{align} $$
 3) 给出这个串的一颗语法分析树
-            
-                  S
-            
-            ______|______
-            
-            |        |    |
-            S    	  S    *
-        
-        ____|____    |
-        
-        |   |   |    |
-        
-        S   S   +    a
-        
-        |   |       
-        
-        a   a    
+    ![example1](../pics/homework5_1.png)
 4) 这个文法是否是二义性的？ 证明你的回答（选作）
     
     这个文法不是二义性的。
@@ -59,10 +43,24 @@
     rfactor→ rfactor* | rprimary
     rprimary→ a | b
 
-1) 对该文法提取左公因子
+1) **对该文法提取左公因子**
 
-2) 提取左公因子的变换能使这个文法适用于自顶向下的语法分析技术吗？
+    该文法不含左公因子
 
-3) 将提取了左公因子的文法继续消除左递归
+2) **提取左公因子的变换能使这个文法适用于自顶向下的语法分析技术吗？**
 
-4) 此时得到的文法适用于自顶向下的语法分析吗？
+    不能，该文法含有左递归
+
+3) **将提取了左公因子的文法继续消除左递归**
+
+        rexpr -> rterm rexpr'
+        rexpr' -> + rterm rexpr' | ε
+        rterm -> rfactor rterm'
+        rterm' -> rfactor rterm' | ε
+        rfactor -> rprimary rfactor'
+        rfactor' -> * rfactor' | ε
+        rprimary -> a | b
+
+4) **此时得到的文法适用于自顶向下的语法分析吗？**
+
+    可以
