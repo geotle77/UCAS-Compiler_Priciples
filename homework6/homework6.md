@@ -70,11 +70,6 @@ d) **为所得的文法构造LL(1)分析表**
 |  lexp-seq |lexp-seq → lexp lexp-seq'|  | lexp-seq → lexp lexp-seq'| lexp-seq → lexp lexp-seq'| |
 |  lexp-seq'|lexp-seq' → lexp lexp-seq'| lexp-seq'→ ε |lexp-seq' → lexp lexp-seq' |lexp-seq' → lexp lexp-seq' | |
 
-    构造预测分析表：对于文法G中全体A->α,
-
-
-
-
 e) 对输入串(a (b (2)) (c))给出相应得LL(1)分析程序的动作
    
    | 栈          | 输入             | 动作    |
