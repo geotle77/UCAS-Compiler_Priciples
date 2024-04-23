@@ -11,7 +11,7 @@ $S->+SS|*SS|a$
 
 如图所示：
 
-  ![example1](pics/homework2_1.png)
+  ![example1](../pics/homework2_1.png)
 
 
 3）**该文法生成的语言是什么？为什么？**
@@ -81,11 +81,11 @@ $S->+SS|*SS|a$
 
 **9-5+2**
 
-![example1](pics/homework2_2.png)
+![example1](../pics/homework2_2.png)
 
 **9−5∗2**
 
-![example2](pics/homework2_3.png)
+![example2](../pics/homework2_3.png)
 
 ### 练习2.1.4
 从 C99 标准开始，C 语言的 for 语句中初始化子句可以是声明，例如：
@@ -159,10 +159,10 @@ D -> C|0
 
 **证明：**
 给出符合题设的DFA，S0为初始状态，S1为模3余1的状态，S2为模3余2的状态，则可以画得DFA如下图所示：
-![example3](pics/homework2_4.png)
+![example3](../pics/homework2_4.png)
 
 将DFA转换为GNFA可以得到
-![example4](pics/homework2_5.png)
+![example4](../pics/homework2_5.png)
 
 将该NFA转换为RE表达式即为：
 

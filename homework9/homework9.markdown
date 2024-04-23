@@ -21,3 +21,90 @@
 **下面的SDT计算了一个正二进制数的值，改写这个SDT，消除左递归**
 
 ![example1](../pics/homework9_1.png)
+
+
+ 改写结果如下：
+
+![example2](../pics/homework9_2.png)
+
+注：需添加下述表达式，并将产生式中的 0，1换为digit, 语义动作中的0,1换为digit.val
+
+    digit -> 0 {digit.val = 0} 
+        | 1 {digit.val = 1}
+
+## 练习5.2.3
+**为下面的产生式写出一个和例5.19类似的L 属性SDT。这里的每个产生式表示一个常见的C 语言中那样的控制流结构。你可能需要生成一个三地址语句来跳转到某个标号L，此时你可以生成语句goto L**
+
+![example3](../pics/homework9_3.png)
+
+**注1：列表中的任何语句都可能包含一条从它的内部跳转到下一条语句的跳转指令，因此简单地为各个语句按顺序生成代码是不够的。注2：可以先写出SDD，然后按照5.4.5节方法转换为SDT。**
+
+1.
+SDD:
+
+        S -> if (C) S1 else S2 	L1 = new();
+                                L2 = new();
+                                C.true = L1;
+                                C.false = L2;
+                                S1.next = S.next;
+                                S2.next = S.next;
+                                S.code = C.code || label || L1 || S1.code || goto S.next || label || L2 || S2.code;
+                                
+SDT:
+
+    S -> if (				{L1 = new();
+                            L2 = new();
+                            C.true = L1;
+                            C.false = L2;}
+            C) 				{S1.next = S.next;}
+            S1 else 		{S2.next = S.next;}
+            S2 				{S.code = C.code || label || L1 || S1.code || goto S.next || label || L2 || S2.code;}
+
+2.
+
+SDD:
+
+    S -> do S1 while ( C ) 	L1 = new();
+                            L2 = new();
+                            C.true = L1;
+                            C.false = S.next;
+                            S1.next = L2;
+                            S.code = label || L1 || S1.code || label || L2 || C.code;
+
+
+SDT:
+
+    S -> do 				{L1 = new();
+                            L2 = new();
+                            S1.next = L2;}
+        S1 while ( 			{C.true = L1;
+                            C.false = S.next;}
+        C ) 				{S.code = label || L1 || S1.code || label || L2 || C.code;}
+
+
+3.
+
+SDD:
+
+    S → { L }				L.next = S.next;
+                            S.code = L.code;
+
+    L → L1 S 				T = new();
+                            L1.next = T;
+                            S.next = L.next;
+                            L.code = L1.code || label || T || S.code; 
+    L → ε 					L.code = "";
+
+
+SDT:
+
+    S → { 					{L.next = S.next;}
+        L }					{S.code = L.code;}
+
+    L → 					{T = new();
+                            L1.next = T;}
+        L1 					{S.next = L.next;}
+        S 					{L.code = L1.code || label || T || S.code; }
+                            
+                            
+    L → ε 					{L.code = "";}
